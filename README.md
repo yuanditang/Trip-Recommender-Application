@@ -123,6 +123,9 @@ The **Trip Recommender Application** helps users discover personalized travel de
 Here’s your project directory structure in Markdown format for direct inclusion in your README.md file, complete with code block formatting and descriptive comments:
 
 ## 📁 Project Directory Structure
+Here’s your project directory structure in Markdown format for direct inclusion in your README.md file, complete with code block formatting and descriptive comments:
+
+## 📁 Project Directory Structure
 
 trip-recommender/
 │
@@ -138,6 +141,10 @@ trip-recommender/
 ├── docs/                   # Proposal, planning, documentation
 ├── tests/                  # Unit and integration tests
 └── README.md               # Project overview and planning
+
+
+
+Let me know if you’d like to generate a live GitHub Pages version of the documentation or a downloadable README.md file!
 
 
 ---
