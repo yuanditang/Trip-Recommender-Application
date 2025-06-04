@@ -120,6 +120,10 @@ The **Trip Recommender Application** helps users discover personalized travel de
 ---
 
 ## 📂 Repository Structure
+Here’s your project directory structure in Markdown format for direct inclusion in your README.md file, complete with code block formatting and descriptive comments:
+
+## 📁 Project Directory Structure
+
 trip-recommender/
 │
 ├── backend/                # Flask server & APIs
@@ -134,6 +138,7 @@ trip-recommender/
 ├── docs/                   # Proposal, planning, documentation
 ├── tests/                  # Unit and integration tests
 └── README.md               # Project overview and planning
+
 
 ---
 
