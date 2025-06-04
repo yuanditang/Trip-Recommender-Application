@@ -148,5 +148,5 @@ trip-recommender/
 
 ## 📫 Contact
 
-- John Creighton – [yuandi.tang@northeastern.edu]  
-- Yuandi Tang – [John Creighton <creighton.jo@northeastern.edu>]
+- John Creighton – [creighton.jo@northeastern.edu]  
+- Yuandi Tang – [tang.yuand@northeastern.edu]
