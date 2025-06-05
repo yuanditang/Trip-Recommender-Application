@@ -1,4 +1,4 @@
-# 🌍 Trip Recommender Application
+# Trip Recommender Application
 
 **Team Members:**  
 - John Creighton  
@@ -9,13 +9,13 @@
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
 The **Trip Recommender Application** helps users discover personalized travel destinations based on preferences such as budget, climate, trip duration, and origin city. It leverages real-time APIs, a custom-built recommendation engine, and a user-friendly interface to generate curated travel suggestions.
 
 ---
 
-## 🚀 Features
+## Features
 
 - **Real-Time Data Integration:**  
   Weather, cost of living, attractions, and more
@@ -31,7 +31,7 @@ The **Trip Recommender Application** helps users discover personalized travel de
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **Languages:** Python, JavaScript, HTML/CSS  
 - **Frameworks & Libraries:** Flask, SQLAlchemy, Bootstrap  
@@ -40,7 +40,7 @@ The **Trip Recommender Application** helps users discover personalized travel de
 
 ---
 
-## 📅 Project Timeline (8 Weeks)
+## Project Timeline (8 Weeks)
 
 | Week | Deliverables                                               |
 |------|------------------------------------------------------------|
@@ -55,7 +55,7 @@ The **Trip Recommender Application** helps users discover personalized travel de
 
 ---
 
-## 📤 Work Distribution
+## Work Distribution
 
 ### John Creighton
 - API research & integration
@@ -71,7 +71,7 @@ The **Trip Recommender Application** helps users discover personalized travel de
 
 ---
 
-## 📋 Project Planning & Management
+## Project Planning & Management
 
 ### 1. Project Kickoff
 - **Goals:** Create a functional, user-friendly trip recommendation app based on real-time destination data and user preferences.
@@ -118,13 +118,13 @@ The **Trip Recommender Application** helps users discover personalized travel de
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 Here’s your project directory structure in Markdown format for direct inclusion in your README.md file, complete with code block formatting and descriptive comments:
 
-## 📁 Project Directory Structure
+## Project Directory Structure
 Here’s your project directory structure in Markdown format for direct inclusion in your README.md file, complete with code block formatting and descriptive comments:
 
-## 📁 Project Directory Structure
+## Project Directory Structure
 
 trip-recommender/
 │
@@ -148,7 +148,7 @@ Let me know if you’d like to generate a live GitHub Pages version of the docum
 
 ---
 
-## 🧪 Future Enhancements
+## Future Enhancements
 
 - Machine learning for smarter recommendations
 - User login and saved trip preferences
@@ -157,7 +157,7 @@ Let me know if you’d like to generate a live GitHub Pages version of the docum
 
 ---
 
-## 📫 Contact
+## Contact
 
 - John Creighton – [creighton.jo@northeastern.edu]  
 - Yuandi Tang – [tang.yuand@northeastern.edu]
