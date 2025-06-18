@@ -1,15 +1,3 @@
--- Attraction Table
-CREATE TABLE IF NOT EXISTS Attraction (
-    attraction_id INTEGER NOT NULL PRIMARY KEY,
-    destination_id INTEGER NOT NULL,
-    name TEXT NOT NULL,
-    type VARCHAR(50),
-    rating DOUBLE,
-    description TEXT,
-    url TEXT,
-    FOREIGN KEY (destination_id) REFERENCES Destination(destination_id)
-);
-
 -- CostOfLiving Table
 CREATE TABLE IF NOT EXISTS CostOfLiving (
     cost_of_living_id INTEGER NOT NULL PRIMARY KEY,
@@ -37,6 +25,7 @@ CREATE TABLE IF NOT EXISTS Destination (
     longitude DOUBLE NOT NULL,
     description TEXT,
     tags VARCHAR(50),
+    type TEXT,
     FOREIGN KEY (country_id) REFERENCES Country(country_id)
 );
 

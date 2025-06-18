@@ -41,9 +41,20 @@ def insert_data(df):
     conn.commit()
     conn.close()
 
+def edit_db():
+    conn = sqlite3.connect('trip_recommender.db')
+
+    # Drop the Attraction table and add type attribute to Destination table
+    conn.execute("DROP TABLE IF EXISTS Attraction;")
+    conn.execute("ALTER TABLE Destination ADD COLUMN type TEXT;")
+    conn.commit()
+    conn.close()
+
+
 def main():
-    country_df = get_country_df()
-    insert_data(country_df)
+    edit_db()
+    #country_df = get_country_df()
+    #insert_data(country_df)
 
 if __name__ == '__main__':
     main()
