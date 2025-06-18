@@ -24,9 +24,8 @@ CREATE TABLE IF NOT EXISTS CostOfLiving (
 CREATE TABLE IF NOT EXISTS Country (
     country_id INTEGER NOT NULL PRIMARY KEY,
     name TEXT NOT NULL,
-    iso_code VARCHAR(20) NOT NULL,
-    safety_index INTEGER,
-    currency VARCHAR(50)
+    iso_code VARCHAR(10) NOT NULL,
+    safety_index DOUBLE
 );
 
 -- Destination Table
