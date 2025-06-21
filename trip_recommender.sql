@@ -65,11 +65,34 @@ CREATE TABLE IF NOT EXISTS VisaRequirement (
 );
 
 -- Weather Table
-CREATE TABLE IF NOT EXISTS Weather (
-    weather_id INTEGER NOT NULL PRIMARY KEY,
-    destination_id INTEGER NOT NULL,
-    avg_monthly_temp_c TEXT,
-    avg_monthly_precip_mm TEXT,
-    best_travel_months TEXT,
-    FOREIGN KEY (destination_id) REFERENCES Destination(destination_id)
-);
+CREATE TABLE IF NOT EXISTS Weather(
+        weather_id INTEGER NOT NULL PRIMARY KEY,
+        destination_id INTEGER NOT NULL,
+        mean_temp_jan REAL,
+        mean_temp_feb REAL,
+        mean_temp_mar REAL,
+        mean_temp_apr REAL,
+        mean_temp_may REAL,
+        mean_temp_jun REAL,
+        mean_temp_jul REAL,
+        mean_temp_aug REAL,
+        mean_temp_sep REAL,
+        mean_temp_oct REAL,
+        mean_temp_nov REAL,
+        mean_temp_dec REAL,
+        mean_temp_ann REAL,
+        mean_precip_jan REAL,
+        mean_precip_feb REAL,
+        mean_precip_mar REAL,
+        mean_precip_apr REAL,
+        mean_precip_may REAL,
+        mean_precip_jun REAL,
+        mean_precip_jul REAL,
+        mean_precip_aug REAL,
+        mean_precip_sep REAL,
+        mean_precip_oct REAL,
+        mean_precip_nov REAL,
+        mean_precip_dec REAL,
+        mean_precip_ann REAL,
+        FOREIGN KEY (destination_id) REFERENCES Destination(destination_id)
+    );
