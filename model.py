@@ -11,7 +11,6 @@ Contains all functions pertaining to the model used in the recommendation system
 import openai
 import sqlite3
 
-# Note that, below, an environment should be used to conceal the secret (enhance security)
 apikey = "PUT YOUR API KEY HERE"
 client = openai.OpenAI(api_key=apikey)
 
