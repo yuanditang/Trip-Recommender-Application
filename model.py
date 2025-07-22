@@ -12,7 +12,7 @@ import openai
 import sqlite3
 
 # Note that, below, an environment should be used to conceal the secret (enhance security)
-apikey = "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"
+apikey = "PUT YOUR API KEY HERE"
 client = openai.OpenAI(api_key=apikey)
 
 def load_schema_from_file():
