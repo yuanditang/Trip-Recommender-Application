@@ -96,3 +96,14 @@ CREATE TABLE IF NOT EXISTS Weather(
         mean_precip_ann REAL,
         FOREIGN KEY (destination_id) REFERENCES Destination(destination_id)
     );
+
+-- Distance Table
+CREATE TABLE "Distance" (
+	"distance_id"	INTEGER,
+	"origin_id"	INTEGER NOT NULL,
+	"destination_id"	INTEGER NOT NULL,
+	"distance_km"	REAL,
+	PRIMARY KEY("distance_id" AUTOINCREMENT),
+	FOREIGN KEY("destination_id") REFERENCES "Destination"("destination_id"),
+	FOREIGN KEY("origin_id") REFERENCES "Destination"("destination_id")
+)
