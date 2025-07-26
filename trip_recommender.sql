@@ -30,17 +30,15 @@ CREATE TABLE IF NOT EXISTS Destination (
 );
 
 -- Lodging Table
-CREATE TABLE IF NOT EXISTS Lodging (
-    lodging_id INTEGER NOT NULL PRIMARY KEY,
-    destination_id INTEGER NOT NULL,
-    name TEXT NOT NULL,
-    type VARCHAR(50),
-    avg_price_per_night DOUBLE NOT NULL,
-    rating DOUBLE,
-    url TEXT,
-    description TEXT,
-    FOREIGN KEY (destination_id) REFERENCES Destination(destination_id)
-);
+CREATE TABLE Lodging (
+	lodging_id INT PRIMARY KEY,
+	destination_id	INT,
+	name	VARCHAR(255),
+	hotel_type	VARCHAR(100),
+	avg_price	DECIMAL(10, 2),
+	rating	DECIMAL(3, 2),
+	FOREIGN KEY("destination_id") REFERENCES "destination"("destination_id")
+)
 
 -- TransportOption Table
 CREATE TABLE IF NOT EXISTS TransportOption (
