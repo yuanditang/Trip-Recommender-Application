@@ -71,25 +71,6 @@ The Trip Recommender Application helps users discover personalized travel destin
 
 ---
 
-## Directory Structure
-
-trip-recommender/
-│
-├── backend/                
-│   ├── api/                # API calls to Amadeus, Numbeo, etc.
-│   ├── gpt/                # GPT prompt construction and response handling
-│   ├── db/                 # SQL schema and query execution
-│
-├── frontend/               
-│   ├── templates/          # HTML pages
-│   └── static/             # CSS and JS
-│
-├── tests/                  # Unit and integration tests
-├── docs/                   # Proposal, planning, and documentation
-└── README.md               # This file
-
----
-
 ## Future Enhancements
 
 - Intelligent follow-up questions to refine recommendations  
