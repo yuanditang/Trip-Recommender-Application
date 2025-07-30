@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS Country (
     country_id INTEGER NOT NULL PRIMARY KEY,
     name TEXT NOT NULL,
     iso_code VARCHAR(10) NOT NULL,
-    safety_index DOUBLE
+    safety_index DOUBLE,
+    continent TEXT
 );
 
 -- Destination Table
