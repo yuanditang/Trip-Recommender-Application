@@ -5,124 +5,101 @@
 - Yuandi Tang  
 
 **Course:** DS5110 - Summer 2025  
-**Instructor:** Professor Nafa    
+**Instructor:** Professor Nafa  
 
 ---
 
 ## Project Overview
 
-The Trip Recommender Application helps users discover personalized travel destinations based on preferences such as budget, climate, trip duration, and origin city. It integrates real-time travel-related data and a custom-built recommendation engine, backed by a structured SQLite database. The application is designed to be modular, expandable, and able to support a range of data insights such as cost, safety, sentiment, and transportation efficiency.
+The Trip Recommender Application helps users discover personalized travel destinations based on preferences such as budget, climate, trip duration, and origin city. It leverages real-time APIs, a user-friendly interface, and the ChatGPT API to translate natural language questions into SQL queries that dynamically fetch relevant destinations from a structured database.
 
 ---
 
-## Features
+## Key Features
 
-- Real-Time API Integration (Amadeus, OpenWeatherMap, etc.)
-- Destination database with city, region, and country-level detail
-- Recommendation engine based on KNN (user preference similarity)
-- Distance calculation using the Haversine formula
-- Data extraction modules to populate destination and lodging tables
-- Scalable project structure with testable modules
+- 🧠 Natural Language Querying via ChatGPT API  
+  Users input questions like “Where can I travel for under $1000 with warm weather?” and receive recommendations in plain English.
+
+- 🗃️ Structured Trip Database  
+  Cities, hotels, distances, prices, and amenities stored in a normalized SQL database.
+
+- 🌐 API Integration  
+  Uses external APIs (e.g., Amadeus, Numbeo) to populate destination information.
+
+- 📊 Contextual Result Explanation  
+  Results returned as natural-language responses summarizing query results.
 
 ---
 
 ## Technologies Used
 
-- Languages: Python, HTML/CSS (for future UI)
-- Libraries: requests, pandas, sqlite3, scikit-learn, geopy
-- Data: Real-time API (Amadeus), custom CSVs, SQLite DB
-- Tools: Jupyter Notebook, Git, VS Code, SQLite CLI
+- Python (Flask, Pandas, SQLAlchemy)  
+- SQLite (development) / PostgreSQL (production)  
+- OpenAI GPT API (text-to-SQL)  
+- Bootstrap (UI), HTML/CSS  
+- RESTful API and JSON
 
 ---
 
-## Dataset Description
+## New Workflow Architecture
 
-This project uses multiple sources:
+1. User inputs a natural question:  
+   e.g., "Show me cities under $800 that are beach destinations."
 
-- Destination.csv: Custom-built list of over 80 destinations globally with columns for destination_id, name, region, latitude, longitude, and IATA code.
-- Amadeus Hotel API: Retrieves hotelId, name, rating, pricing, geo location.
-- HotelSentiment API: Sentiment and rating scores for sampled hotels.
-- SQLite database: trip_recommender.db with schema tables Destination and Lodging.
+2. GPT model converts the question → SQL query:  
+   SELECT name FROM Destination WHERE avg_price < 800 AND tags LIKE '%beach%';
 
-The database contains location metadata for each destination and links to Lodging data via destination_id. Lodging includes hotel name, type, star rating, price per night, and sentiment scores.
+3. SQL query is run against trip_recommender.db
 
----
-
-## Tools and Methodologies
-
-We use the following key tools and models:
-
-- Python + Requests: API querying and automation
-- pandas: Data wrangling, transformation, and I/O
-- sqlite3: Relational database operations
-- KNN Algorithm (Scikit-learn): Used for finding nearest destination neighbors based on user features
-- Distance Matrix: Precomputed using Haversine formula and exported to CSV for modeling
-
-Why KNN?
-- It is interpretable, easy to update with new destinations, and does not require extensive training. This makes it ideal for prototyping a recommender system based on user similarity vectors.
+4. Results are formatted back into human-friendly sentences:  
+   e.g., “Here are some beach destinations under $800: Miami, Cancun, and Lisbon.”
 
 ---
 
-## Preliminary Timeline (8 Weeks)
+## Updated Project Timeline (8 Weeks)
 
-| Week | Tasks                                                                 |
-|------|-----------------------------------------------------------------------|
-| 1    | Finalize project scope, assign roles, explore APIs, gather city data |
-| 2    | Design and create SQLite DB schema (Destination & Lodging)          |
-| 3    | Write API wrappers for Amadeus & HotelSentiment                      |
-| 4    | Fetch and load real data into DB (with sampling + error handling)   |
-| 5    | Build distance matrix and KNN model for destination recommendation  |
-| 6    | Construct prototype recommender function (with constraints)         |
-| 7    | Test with mock user profiles and edge cases                         |
-| 8    | Compile final report, markdown files, and submit codebase           |
-
----
-
-## Entity Relationship Summary
-
-- Destination Table  
-  Columns: destination_id, name, country, region, latitude, longitude, iata
-
-- Lodging Table  
-  Columns: lodging_id, destination_id (FK), name, type, avg_price_per_night, rating, url, description
-
-- Distance Table (intermediate CSV)  
-  Columns: destination_id_1, destination_id_2, distance_km
+| Week | Deliverables                                                   |
+|------|----------------------------------------------------------------|
+| 1    | Define requirements, finalize API list, and ChatGPT setup      |
+| 2    | Build destination database schema and populate initial data    |
+| 3    | Design natural language → SQL prompt patterns                  |
+| 4    | Create back-end endpoint to call GPT and query DB              |
+| 5    | Build front-end form and display results                       |
+| 6    | Refine prompts and response formatting                         |
+| 7    | Conduct full testing; polish interface and fix edge cases      |
+| 8    | Final documentation, presentation, and demo                    |
 
 ---
 
-## KNN Implementation Plan
+## Directory Structure
 
-- Normalize user inputs (e.g. budget, trip length, interest)
-- Assign vectors to each destination (climate, avg cost, safety, etc.)
-- Use scikit-learn NearestNeighbors to return Top 3–5 matching destinations
-
-We plan to initially use manual feature weights and expand to more data-driven modeling later (e.g. PCA, clustering, or collaborative filtering).
-
----
-
-## Progress and Observations
-
-As of July 30:
-
-- Successfully loaded 80+ destinations into SQLite
-- Implemented hotel sampling from Amadeus & HotelSentiment APIs
-- Created robust distance matrix using Haversine formula
-- Built modular scripts for destination, hotel, and sentiment ingestion
+trip-recommender/
+│
+├── backend/                
+│   ├── api/                # API calls to Amadeus, Numbeo, etc.
+│   ├── gpt/                # GPT prompt construction and response handling
+│   ├── db/                 # SQL schema and query execution
+│
+├── frontend/               
+│   ├── templates/          # HTML pages
+│   └── static/             # CSS and JS
+│
+├── tests/                  # Unit and integration tests
+├── docs/                   # Proposal, planning, and documentation
+└── README.md               # This file
 
 ---
 
-## Future Extensions
+## Future Enhancements
 
-- Travel time estimation from distance using multivariate regression
-- Integration of real-time flight price APIs
-- Full-stack web deployment with Flask or Streamlit
-- More advanced ML models (e.g. content-based or hybrid recommender systems)
-- User login, saved trips, collaborative filtering based on peer preferences
+- Intelligent follow-up questions to refine recommendations  
+- Visualization of travel clusters (map + distance)  
+- Auto-evaluation of GPT SQL performance and accuracy  
+- Voice-based queries
 
 ---
 
-## Contacts
+## Contact
 
 - John Creighton – creighton.jo@northeastern.edu  
 - Yuandi Tang – tang.yuand@northeastern.edu
