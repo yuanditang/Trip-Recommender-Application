@@ -15,13 +15,30 @@ apikey = "YOUR API KEY HERE"
 client = openai.OpenAI(api_key=apikey)
 
 def load_schema_from_file():
+    """
+    Reads the schema of trip_recommender.sql and returns the results as a string
+    """
     with open("trip_recommender.sql", 'r') as f:
         return f.read()
+
+def get_country_names():
+    """
+    Helper function for generate_query. Returns the names of countries in the Country table as a list.
+    """
+    country_names = []
+    conn = sqlite3.connect('trip_recommender.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT name FROM Country')
+    for row in cursor.fetchall():
+        country_names.append(row[0])
+    conn.close()
+    return country_names
 
 def generate_query(prompt, schema):
     """
     Function to generate a valid SQL query based on user input.
     """
+    country_names = get_country_names()
     response = client.chat.completions.create(
         model="gpt-4", # for paid API keys
         #model="gpt-3.5-turbo", for free-tier API keys
@@ -30,6 +47,7 @@ def generate_query(prompt, schema):
              "content": f"""Your task is to generate a SQL query based on the user's request. Do not
                         wrap the query in quotes, and be sure to include the ; at the end of the query.
                         Guidelines:
+                            - Convert any user-specified country names to their corresponding country names in {country_names}
                             - If the user specifies a specific destination, return {ERROR_MESSAGE_1}
                             - If the user does not specify an origin city or where they are traveling from, return {ERROR_MESSAGE_2}
                             - If the user's prompt doesn't pertain to travel recommendations or is incomprehensible, return {ERROR_MESSAGE_3}
@@ -48,7 +66,7 @@ def generate_query(prompt, schema):
                                 D.distance_km <= (20 * hoursoftrip)
                                 where D is the distance table
                             - If the user specifies a budget constraint but no time constraint, include the following condition in the WHERE clause:
-                                D.distance_km <= ((userbudget - 15 - (daysoftrip * C.daily_avg_usd)) / 0.53)
+                                D.distance_km <= ((userbudget - 15 - (5 * C.daily_avg_usd)) / 0.53)
                                 where D is the distance table and C is the CostofLiving table
                             - If the user specifies both time and budget, include the following condition in the WHERE clause:
                                 D.distance_km <= CASE
