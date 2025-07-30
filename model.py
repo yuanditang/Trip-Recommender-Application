@@ -34,11 +34,25 @@ def get_country_names():
     conn.close()
     return country_names
 
+def get_destination_names():
+    """
+    Helper function for generate_query. Returns the names of destinations in the Destination table as a list.
+    """
+    destination_names = []
+    conn = sqlite3.connect('trip_recommender.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT name FROM Destination')
+    for row in cursor.fetchall():
+        destination_names.append(row[0])
+    conn.close()
+    return destination_names
+
 def generate_query(prompt, schema):
     """
     Function to generate a valid SQL query based on user input.
     """
     country_names = get_country_names()
+    destination_names = get_destination_names()
     response = client.chat.completions.create(
         model="gpt-4", # for paid API keys
         #model="gpt-3.5-turbo", for free-tier API keys
@@ -48,6 +62,7 @@ def generate_query(prompt, schema):
                         wrap the query in quotes, and be sure to include the ; at the end of the query.
                         Guidelines:
                             - Convert any user-specified country names to their corresponding country names in {country_names}
+                            - Convert any user-specified origin city names to their corresponding names in {destination_names}
                             - If the user specifies a specific destination, return {ERROR_MESSAGE_1}
                             - If the user does not specify an origin city or where they are traveling from, return {ERROR_MESSAGE_2}
                             - If the user's prompt doesn't pertain to travel recommendations or is incomprehensible, return {ERROR_MESSAGE_3}
