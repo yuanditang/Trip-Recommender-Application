@@ -1,7 +1,9 @@
 # Trip Recommender Application
 
 **Team Members:** John Creighton, Yuandi Tang
+
 **Course:** DS5110 - Summer 2025
+
 **Instructor:** Professor Nafa
 
 -----
