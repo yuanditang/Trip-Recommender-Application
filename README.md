@@ -37,7 +37,7 @@ This project addresses that gap with a data-driven Trip Recommender system. It p
 
 -----
 
-## 🏛️ System Architecture
+## System Architecture
 
 The application is built on a modular, **three-tier architecture** for scalability and maintainability:
 
