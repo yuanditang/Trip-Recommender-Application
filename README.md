@@ -1,86 +1,116 @@
 # Trip Recommender Application
 
-**Team Members:**  
-- John Creighton  
-- Yuandi Tang  
+**Team Members:** John Creighton, Yuandi Tang
 
-**Course:** DS5110 - Summer 2025  
-**Instructor:** Professor Nafa  
+**Course:** DS5110 - Summer 2025
 
----
+**Instructor:** Professor Nafa
+
+-----
 
 ## Project Overview
 
-The Trip Recommender Application helps users discover personalized travel destinations based on preferences such as budget, climate, trip duration, and origin city. It leverages real-time APIs, a user-friendly interface, and the ChatGPT API to translate natural language questions into SQL queries that dynamically fetch relevant destinations from a structured database.
+Modern travel planning is often overwhelming. While online travel agencies (OTAs) offer countless options, users can experience **decision fatigue** from navigating complex filters and pre-packaged deals that lack deep personalization.
 
----
+This project addresses that gap with a data-driven Trip Recommender system. It provides a more intuitive and personalized planning experience by translating simple, conversational user queries into sophisticated, multi-constraint database queries. Our system moves beyond basic filters to holistically consider a user's budget, time constraints, climate preferences, and even visa requirements to suggest genuinely tailored travel itineraries.
+
+-----
+
+## Deliverables
+
+[**Project Report**](https://www.overleaf.com/read/qxxdhcfswcdv#ee741e)
+
+[**Project Presentation**](https://docs.google.com/presentation/d/1HwGILmvC6zpBUzfZ58Yq7H0yq7zYspyp0qVOfqlfz5Y/edit?usp=sharing)
+
+-----
+## File Structures
+
+* Trip_Recommender_Application/
+  * [Data_Files/](/Data_Files)                  --All intermediate datasets and raw data sources
+    * (e.g., Destination.csv, Lodging.csv, climate_data.csv)
+  * Web/                          --Core application logic and interface
+    * [app.py](/web/app.py)                      --Main Flask application
+    * [model.py](/web/model.py)                    --Business logic and recommendation engine
+    * [trip_recommender.db](/web/trip_recommender.db)         --SQLite database
+    * [trip_recommender.sql](/web/trip_recommender.sql)        --SQL schema for database setup
+    * [templates/](/web/templates/)                  --HTML templates
+      * [system.html](/web/templates/system.html)
+  * README.md                     --Project overview and instructions
+
+-----
 
 ## Key Features
 
-- 🧠 Natural Language Querying via ChatGPT API  
-  Users input questions like “Where can I travel for under $1000 with warm weather?” and receive recommendations in plain English.
+  - **Conversational Querying:** Utilizes OpenAI's **GPT-4** to translate natural language prompts (e.g., *"I want to go somewhere historical in March for a week from Philadelphia"*) into precise SQL queries.
+  - **Multi-Source Data Integration:** The recommendation engine is powered by a comprehensive knowledge base built from multiple sources:
+      - **NASA POWER API:** For historical climate data across 774 destinations.
+      - **Amadeus API:** For real-time hotel pricing and availability.
+      - **Numbeo:** For granular cost-of-living indices.
+      - **Custom Datasets:** For visa requirements, destination metadata, and a pre-computed matrix of **598,302** distances.
+  - **Dynamic Constraint Handling:** Intelligently filters destinations based on a combination of user needs:
+      - **Budget & Time:** Dynamically calculates a feasible travel radius based on total budget and trip duration.
+      - **Climate:** Filters by temperature and precipitation preferences based on the month of travel.
+      - **Logistics:** Automatically validates visa requirements and safety indices for the traveler's citizenship.
+  - **Transparent & Interactive UI:** A web interface built with **Flask** and **Bootstrap** provides a seamless user experience. To build trust and offer educational insight, the application transparently displays the generated SQL query alongside the natural language recommendations.
+  - **Contextual Result Explanation:** Raw data results are transformed back into a friendly, natural-language summary, explaining *why* each destination was recommended.
 
-- 🗃️ Structured Trip Database  
-  Cities, hotels, distances, prices, and amenities stored in a normalized SQL database.
+-----
 
-- 🌐 API Integration  
-  Uses external APIs (e.g., Amadeus, Numbeo) to populate destination information.
+## System Architecture
 
-- 📊 Contextual Result Explanation  
-  Results returned as natural-language responses summarizing query results.
+The application is built on a modular, **three-tier architecture** for scalability and maintainability:
 
----
+1.  **Presentation Layer (Frontend):** A responsive Flask web application using Bootstrap for styling. This layer handles all user interaction.
+2.  **Business Logic Layer (Backend):** The core Python engine that integrates with the GPT-4 API for natural language processing and implements the constraint-based filtering algorithms.
+3.  **Data Access Layer (Database):** A normalized **SQLite** database designed with an optimized schema to support complex, multi-table queries efficiently.
 
-## Technologies Used
+-----
 
-- Python (Flask, Pandas, SQLAlchemy)  
-- SQLite (development) / PostgreSQL (production)  
-- OpenAI GPT API (text-to-SQL)  
-- Bootstrap (UI), HTML/CSS  
-- RESTful API and JSON
+##  Technologies Used
 
----
+  - **Backend:** Python (Flask, Pandas, SQLAlchemy)
+  - **Database:** SQLite
+  - **NLP:** OpenAI GPT-4 API
+  - **Frontend:** HTML/CSS, Bootstrap 5
+  - **Core Libraries:** `requests` (for API integration), `concurrent.futures` (for parallel data fetching)
 
-## New Workflow Architecture
+-----
 
-1. User inputs a natural question:  
-   e.g., "Show me cities under $800 that are beach destinations."
+## Workflow
 
-2. GPT model converts the question → SQL query:  
-   SELECT name FROM Destination WHERE avg_price < 800 AND tags LIKE '%beach%';
+1.  **User Input:** A user enters a natural language query into the web interface.
 
-3. SQL query is run against trip_recommender.db
+      - *e.g., "I want to travel within the US from Boston for $2000"*
 
-4. Results are formatted back into human-friendly sentences:  
-   e.g., “Here are some beach destinations under $800: Miami, Cancun, and Lisbon.”
+2.  **Text-to-SQL Conversion:** The backend sends the query and database schema context to the GPT-4 API.
 
----
+      - *GPT-4 generates a corresponding SQL query.*
 
-## Updated Project Timeline (8 Weeks)
+    <!-- end list -->
 
-| Week | Deliverables                                                   |
-|------|----------------------------------------------------------------|
-| 1    | Define requirements, finalize API list, and ChatGPT setup      |
-| 2    | Build destination database schema and populate initial data    |
-| 3    | Design natural language → SQL prompt patterns                  |
-| 4    | Create back-end endpoint to call GPT and query DB              |
-| 5    | Build front-end form and display results                       |
-| 6    | Refine prompts and response formatting                         |
-| 7    | Conduct full testing; polish interface and fix edge cases      |
-| 8    | Final documentation, presentation, and demo                    |
+    ```sql
+    SELECT DISTINCT Dest.name FROM Distance AS D JOIN Destination AS Dest ON D.destination_id = Dest.destination_id JOIN CostOfLiving AS Cl ON Dest.destination_id = Cl.destination_id WHERE D.origin_id = (SELECT destination_id FROM Destination WHERE name LIKE '%Boston%') AND D.distance_km <= ((2000 - 15 - (5 * Cl.daily_avg_usd)) / 0.53) AND (Dest.country_id = 193) LIMIT 5;
+    ```
 
----
+3.  **Database Query:** The validated SQL query is executed against the `trip_recommender.db` database.
 
-## Future Enhancements
+4.  **Response Generation:** The query results (a list of destinations) are sent back to GPT-4 to be formatted into a human-friendly paragraph.
 
-- Intelligent follow-up questions to refine recommendations  
-- Visualization of travel clusters (map + distance)  
-- Auto-evaluation of GPT SQL performance and accuracy  
-- Voice-based queries
+      - *e.g., "Sure, I've found several exciting destinations within your budget. 1. Jacksonville: Famous for its beautiful beaches... 2. Philadelphia: Renowned for its rich history..."*
 
----
+-----
+
+## ✨ Future Enhancements
+
+  - **Machine Learning Personalization:** Integrate user feedback and history to learn individual preferences.
+  - **Interactive Map Visualization:** Display recommended destinations on an interactive map.
+  - **Real-Time Pricing:** Integrate with live flight and hotel pricing APIs for bookable itineraries.
+  - **Voice-Based Queries:** Allow users to ask questions via a voice interface.
+  - **Collaborative Filtering:** Recommend destinations based on what similar users have enjoyed.
+
+-----
 
 ## Contact
 
-- John Creighton – creighton.jo@northeastern.edu  
-- Yuandi Tang – tang.yuand@northeastern.edu
+  - John Creighton – creighton.jo@northeastern.edu
+  - Yuandi Tang – tang.yuand@northeastern.edu
