@@ -1,5 +1,3 @@
-Here is a revised README, incorporating the detailed information and technical specifics from the original LaTeX technical report.
-
 # Trip Recommender Application
 
 **Team Members:**
