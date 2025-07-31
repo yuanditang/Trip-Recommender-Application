@@ -15,6 +15,24 @@ Modern travel planning is often overwhelming. While online travel agencies (OTAs
 This project addresses that gap with a data-driven Trip Recommender system. It provides a more intuitive and personalized planning experience by translating simple, conversational user queries into sophisticated, multi-constraint database queries. Our system moves beyond basic filters to holistically consider a user's budget, time constraints, climate preferences, and even visa requirements to suggest genuinely tailored travel itineraries.
 
 -----
+## File Structures
+Trip_Recommender_Application/
+│
+├── Data_Files/                     # All intermediate datasets and raw data sources
+│   ├── climate_data.csv
+│   ├── visa_requirements.json
+│   ├── distance_matrix.csv
+│   ├── cost_of_living_data.csv
+│
+├── Web/                            # Core application logic and interface
+│   ├── app.py                      # Main Flask application
+│   ├── model.py                    # Business logic and recommendation engine
+│   ├── trip_recommender.db         # SQLite database
+│   ├── trip_recommender.sql        # SQL schema for database setup
+│   ├── templates/                  # HTML templates
+│     └──   system.html
+│
+├── README.md                       # Project overview and instructions
 
 ## Key Features
 
