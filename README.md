@@ -15,6 +15,14 @@ Modern travel planning is often overwhelming. While online travel agencies (OTAs
 This project addresses that gap with a data-driven Trip Recommender system. It provides a more intuitive and personalized planning experience by translating simple, conversational user queries into sophisticated, multi-constraint database queries. Our system moves beyond basic filters to holistically consider a user's budget, time constraints, climate preferences, and even visa requirements to suggest genuinely tailored travel itineraries.
 
 -----
+
+## Deliverables
+
+[**Project Report**](https://www.overleaf.com/read/qxxdhcfswcdv#ee741e)
+
+[**Project Presentation**](https://docs.google.com/presentation/d/1HwGILmvC6zpBUzfZ58Yq7H0yq7zYspyp0qVOfqlfz5Y/edit?usp=sharing)
+
+-----
 ## File Structures
 
 * Trip_Recommender_Application/
@@ -28,7 +36,6 @@ This project addresses that gap with a data-driven Trip Recommender system. It p
     * [templates/](/web/templates/)                  --HTML templates
       * [system.html](/web/templates/system.html)
   * README.md                     --Project overview and instructions
-
 
 -----
 
