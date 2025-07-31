@@ -21,7 +21,7 @@ This project addresses that gap with a data-driven Trip Recommender system. It p
   * Data_Files/                   --All intermediate datasets and raw data sources
     * (e.g., Destination.csv, Lodging.csv, climate_data.csv)
   * Web/                          --Core application logic and interface
-    * app.py                      --Main Flask application
+    *(app.py)[/web/app.py]                      --Main Flask application
     * model.py                    --Business logic and recommendation engine
     * trip_recommender.db         --SQLite database
     * trip_recommender.sql        --SQL schema for database setup
