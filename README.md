@@ -33,8 +33,8 @@ This project addresses that gap with a data-driven Trip Recommender system. It p
     * [model.py](/web/model.py)                    --Business logic and recommendation engine
     * [trip_recommender.db](/web/trip_recommender.db)         --SQLite database
     * [trip_recommender.sql](/web/trip_recommender.sql)        --SQL schema for database setup
-    * [templates/](/web/templates)                  --HTML templates
-      * [system.html](/web/templates/system.html)
+    * [template/](/web/template)                  --HTML templates
+      * [system.html](/web/template/system.html)
   * README.md                     --Project overview and instructions
 
 -----
