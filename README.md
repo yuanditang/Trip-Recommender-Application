@@ -16,7 +16,7 @@ This project addresses that gap with a data-driven Trip Recommender system. It p
 
 -----
 ## File Structures
-```markdown
+
 Trip_Recommender_Application/
 ├── Data_Files/                     # All intermediate datasets and raw data sources
 │   └── (e.g., Destination.csv, Lodging.csv, climate_data.csv)
@@ -30,7 +30,8 @@ Trip_Recommender_Application/
 │       └── system.html
 │
 └── README.md                       # Project overview and instructions
-```
+
+
 -----
 
 ## Key Features
