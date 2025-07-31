@@ -642,14 +642,6 @@ def query_db(table_name):
     print(f"{table_name}:")
     conn = sqlite3.connect('trip_recommender.db')
     cursor = conn.cursor()
-    if table_name == "Distance":
-        table_name
-    elif table_name == "Destination":
-        print("Destination tags:")
-        cursor.execute(f"SELECT DISTINCT tags FROM {table_name};")
-        rows = cursor.fetchall()
-        for row in rows:
-            print(row)
     try:
         print("Schema:")
         cursor.execute(f"PRAGMA table_info({table_name});")

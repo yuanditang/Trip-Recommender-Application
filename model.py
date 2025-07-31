@@ -81,15 +81,15 @@ def generate_query(prompt, schema):
                                 D.distance_km <= (20 * hoursoftrip)
                                 where D is the distance table
                             - If the user specifies a budget constraint but no time constraint, include the following condition in the WHERE clause:
-                                D.distance_km <= ((userbudget - 15 - (5 * C.daily_avg_usd)) / 0.53)
-                                where D is the distance table and C is the CostofLiving table
+                                D.distance_km <= ((userbudget - 15 - 5*(C.daily_avg_usd + L.avg_price)) / 0.53)
+                                where D is the distance table, C is the CostofLiving table, and L is the lodging table
                             - If the user specifies both time and budget, include the following condition in the WHERE clause:
                                 D.distance_km <= CASE
-                                  WHEN ((userbudget - 15 - (daysoftrip * C.daily_avg_usd)) / 0.53) < (20 * hoursoftrip)
-                                  THEN ((userbudget - 15 - (daysoftrip * C.daily_avg_usd)) / 0.53)
+                                  WHEN ((userbudget - 15 - daysoftrip * (C.daily_avg_usd L.avg_price)) / 0.53) < (20 * hoursoftrip)
+                                  THEN ((userbudget - 15 - daysoftrip * (C.daily_avg_usd L.avg_price)) / 0.53)
                                   ELSE (20 * hoursoftrip)
                                 END
-                                where D is the distance table and C is the CostofLiving table
+                                where D is the distance table, C is the CostofLiving table and L is the lodging table
                             - If the user mentions that they want to travel internationally or abroad, include the following condition in the WHERE clause:
                                 Dest.country_id != (
                                     SELECT country_id
@@ -194,7 +194,7 @@ def generate_response(prompt, results):
 def main():
     # Example usage
     schema = load_schema_from_file()
-    prompt = ("I am traveling from Boston and want to go somewhere in Europe for 10 days.")
+    prompt = ("I am traveling from Boston and want to go somewhere in Europe for less than $4000.")
     prompt = prompt.title()
     query = generate_query(prompt, schema)
     query = query.strip(' "')
