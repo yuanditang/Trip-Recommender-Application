@@ -33,8 +33,8 @@ This project addresses that gap with a data-driven Trip Recommender system. It p
     * [model.py](/web/model.py)                    --Business logic and recommendation engine
     * [trip_recommender.db](/web/trip_recommender.db)         --SQLite database
     * [trip_recommender.sql](/web/trip_recommender.sql)        --SQL schema for database setup
-    * [templates/](/web/templates/)                  --HTML templates
-      * [system.html](/web/templates/system.html)
+    * [template/](/web/template)                  --HTML templates
+      * [system.html](/web/template/system.html)
   * README.md                     --Project overview and instructions
 
 -----
@@ -44,7 +44,6 @@ This project addresses that gap with a data-driven Trip Recommender system. It p
   - **Conversational Querying:** Utilizes OpenAI's **GPT-4** to translate natural language prompts (e.g., *"I want to go somewhere historical in March for a week from Philadelphia"*) into precise SQL queries.
   - **Multi-Source Data Integration:** The recommendation engine is powered by a comprehensive knowledge base built from multiple sources:
       - **NASA POWER API:** For historical climate data across 774 destinations.
-      - **Amadeus API:** For real-time hotel pricing and availability.
       - **Numbeo:** For granular cost-of-living indices.
       - **Custom Datasets:** For visa requirements, destination metadata, and a pre-computed matrix of **598,302** distances.
   - **Dynamic Constraint Handling:** Intelligently filters destinations based on a combination of user needs:
