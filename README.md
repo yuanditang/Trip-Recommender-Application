@@ -92,16 +92,15 @@ Example output:
 
 ---
 ## Run Application
-    Download /web folder
-    Change YOURAPIKEY in model.py to a valid OpenAI API
-    Run cosole on the device: cd to the web folder
-    Enabled local app usage with clear setup instructions:
-    Run
-    ```
-         export FLASK_APP=your_app_name.py
-         flask run
-    ```
-    Open 127.0.0.1/5000 to start the application
+- Download /web folder
+- Change YOURAPIKEY in model.py to a valid OpenAI API
+- Run cosole on the device: 
+```
+  cd to the web folder
+  export FLASK_APP=your_app_name.py
+  flask run
+```
+- Visit 127.0.0.1/5000 in browser to start the application
     
 
 ## Future Enhancements
