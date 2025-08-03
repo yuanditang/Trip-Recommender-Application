@@ -640,7 +640,7 @@ def query_db(table_name):
     Mostly used to assist with debugging.
     """
     print(f"{table_name}:")
-    conn = sqlite3.connect('trip_recommender.db')
+    conn = sqlite3.connect('web/trip_recommender.db')
     cursor = conn.cursor()
     try:
         print("Schema:")
@@ -702,3 +702,9 @@ def alter_weather_schema():
     conn.executescript(script)
     conn.commit()
     conn.close()
+
+def main():
+    query_db("Country")
+
+if __name__ == "__main__":
+    main()

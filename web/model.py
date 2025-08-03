@@ -11,7 +11,7 @@ ERROR_MESSAGE_3 = "Sorry, I did not understand your prompt. I can only be used f
 ERROR_MESSAGE_4 = "Please provide some more details about where you might want to go."
 ERROR_MESSAGE_5 = "Unfortunately, I could not find any destinations that met your criteria. Consider trying different parameters and try again."
 
-apikey = "YOUR API KEY HERE"
+apikey = "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"
 client = openai.OpenAI(api_key=apikey)
 
 def load_schema_from_file():
@@ -69,8 +69,9 @@ def generate_query(prompt, schema):
                             - Always select DISTINCT
                             - Always ORDER BY RANDOM()
                             - Values for CostOfLiving.budget_level are 'Luxury', 'Mid-range', and 'Budget'
-                            - By default, only select destinations in countries where safety_index > 0
-                                - If the user asks for "safe" destinations, only select destinations in countries where safety_index > 0.5
+                            - By default, only select destinations in countries where safety_index > -1
+                                - If the user asks for "safe" destinations, only select destinations in countries where safety_index > 0
+                                - If the user asks for a specific country, do not filter by safety_index
                             - visa_requirement in VisaRequirement table represents whether a visa is required to travel from origin_country_id to destination_country_id
                                 - 0 = no visa required, 0.5 = visa required, 1 = travel banned
                                 - Only recommend destinations that the user is not banned from (ie, visa_requirement != 1)
@@ -194,7 +195,7 @@ def generate_response(prompt, results):
 def main():
     # Example usage
     schema = load_schema_from_file()
-    prompt = ("I am traveling from Boston and want to go somewhere in Europe for less than $4000.")
+    prompt = (" want to travel within US from Boston for $2000.")
     prompt = prompt.title()
     query = generate_query(prompt, schema)
     query = query.strip(' "')

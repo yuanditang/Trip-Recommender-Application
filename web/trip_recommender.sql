@@ -41,25 +41,13 @@ CREATE TABLE Lodging (
 	FOREIGN KEY("destination_id") REFERENCES "destination"("destination_id")
 )
 
--- TransportOption Table
-CREATE TABLE IF NOT EXISTS TransportOption (
-    transport_id INTEGER NOT NULL PRIMARY KEY,
-    destination_id INTEGER NOT NULL,
-    origin_city TEXT NOT NULL,
-    transport_type VARCHAR(50) NOT NULL,
-    avg_duration_hours DOUBLE NOT NULL,
-    avg_price_usd DOUBLE NOT NULL,
-    carrier_name TEXT,
-    notes TEXT,
-    FOREIGN KEY (destination_id) REFERENCES Destination(destination_id)
-);
-
 -- VisaRequirement Table
 CREATE TABLE IF NOT EXISTS VisaRequirement (
     visa_requirement_id INTEGER NOT NULL PRIMARY KEY,
+    origin_country_id INTEGER NOT NULL,
     destination_country_id INTEGER NOT NULL,
-    visa_required_origin_countries TEXT,
-    banned_origin_countries TEXT,
+    visa_requirement REAL,
+    FOREIGN KEY (origin_country_id) REFERENCES Country(country_id)
     FOREIGN KEY (destination_country_id) REFERENCES Country(country_id)
 );
 
