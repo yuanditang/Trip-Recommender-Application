@@ -11,7 +11,7 @@ ERROR_MESSAGE_3 = "Sorry, I did not understand your prompt. I can only be used f
 ERROR_MESSAGE_4 = "Please provide some more details about where you might want to go."
 ERROR_MESSAGE_5 = "Unfortunately, I could not find any destinations that met your criteria. Consider trying different parameters and try again."
 
-apikey = "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"
+apikey = "YOUR API KEY HERE"
 client = openai.OpenAI(api_key=apikey)
 
 def load_schema_from_file():
