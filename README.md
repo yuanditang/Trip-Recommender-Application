@@ -24,8 +24,6 @@ Our project addresses this challenge with a data-driven Trip Recommender system 
 ## File Structure
 
 * Trip_Recommender_Application/
-  * [Data_Files/](/Data_Files)                  --All intermediate datasets and raw data sources
-    * (e.g., Destination.csv, Lodging.csv, climate_data.csv)
   * Web/                          --Core application logic and interface
     * [app.py](/web/app.py)                      --Main Flask application
     * [model.py](/web/model.py)                    --Business logic and recommendation engine
