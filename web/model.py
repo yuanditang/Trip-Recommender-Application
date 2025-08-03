@@ -11,7 +11,7 @@ ERROR_MESSAGE_3 = "Sorry, I did not understand your prompt. I can only be used f
 ERROR_MESSAGE_4 = "Please provide some more details about where you might want to go."
 ERROR_MESSAGE_5 = "Unfortunately, I could not find any destinations that met your criteria. Consider trying different parameters and try again."
 
-apikey = "YOUR API KEY HERE"
+apikey = "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"
 client = openai.OpenAI(api_key=apikey)
 
 def load_schema_from_file():
@@ -86,8 +86,8 @@ def generate_query(prompt, schema):
                                 where D is the distance table, C is the CostofLiving table, and L is the lodging table
                             - If the user specifies both time and budget, include the following condition in the WHERE clause:
                                 D.distance_km <= CASE
-                                  WHEN ((userbudget - 15 - daysoftrip * (C.daily_avg_usd L.avg_price)) / 0.53) < (20 * hoursoftrip)
-                                  THEN ((userbudget - 15 - daysoftrip * (C.daily_avg_usd L.avg_price)) / 0.53)
+                                  WHEN ((userbudget - 15 - daysoftrip * (CoL.daily_avg_usd + COALESCE(L.avg_price, (SELECT AVG(avg_price) FROM Lodging)))) / 0.53) < (20 * hoursoftrip)
+                                  THEN ((userbudget - 15 - daysoftrip * (CoL.daily_avg_usd + COALESCE(L.avg_price, (SELECT AVG(avg_price) FROM Lodging)))) / 0.53)
                                   ELSE (20 * hoursoftrip)
                                 END
                                 where D is the distance table, C is the CostofLiving table and L is the lodging table
@@ -195,7 +195,7 @@ def generate_response(prompt, results):
 def main():
     # Example usage
     schema = load_schema_from_file()
-    prompt = (" want to travel within US from Boston for $2000.")
+    prompt = ("I want to travel to China from Boston for less than $20000.")
     prompt = prompt.title()
     query = generate_query(prompt, schema)
     query = query.strip(' "')
